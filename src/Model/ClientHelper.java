@@ -1,21 +1,27 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ClientHelper implements Serializable {
 
-    private Client theClient;
     private int responseNumber;
-    private String line;
+    private int requestNumber;
+    private String searchParameter;
+    private ArrayList<Client> clientList;
     static final long serialVersionUID = 1;
 
-    public Client getTheClient() {
-        return theClient;
+    public ClientHelper() {
+        clientList = new ArrayList<Client>();
     }
 
-    public void setTheClient(Client theClient) {
-        this.theClient = theClient;
+    public ClientHelper(int responseNumber, int requestNumber, String searchParameter, ArrayList<Client> clientList) {
+        this.responseNumber = responseNumber;
+        this.requestNumber = requestNumber;
+        this.searchParameter = searchParameter;
+        this.clientList = clientList;
     }
+
 
     public int getResponseNumber() {
         return responseNumber;
@@ -25,14 +31,27 @@ public class ClientHelper implements Serializable {
         this.responseNumber = responseNumber;
     }
 
-    public String getLine() {
-        return line;
+    public int getRequestNumber() {
+        return requestNumber;
     }
 
-    public void setLine(String line) {
-        this.line = line;
+    public void setRequestNumber(int requestNumber) {
+        this.requestNumber = requestNumber;
     }
 
+    public ArrayList<Client> getClientList() {
+        return clientList;
+    }
 
+    public void setClientList(ArrayList<Client> clientList) {
+        this.clientList = clientList;
+    }
 
+    public String getSearchParameter() {
+        return searchParameter;
+    }
+
+    public void setSearchParameter(String searchParameter) {
+        this.searchParameter = searchParameter;
+    }
 }

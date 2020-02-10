@@ -28,11 +28,9 @@ public class ClientController {
             theView = new ClientView();
             output = new ObjectOutputStream(aSocket.getOutputStream());
             input = new ObjectInputStream(aSocket.getInputStream());
-
+            clientHelper = new ClientHelper();
             attachListeners();
-            //clientHelper = new ClientHelper(new Player(gameView.getPlayersName("Enter Player's Name"), 'Z'), null, null, 0);
-            output.writeObject(clientHelper);
-            output.flush();
+
             while (true) {
                 clientHelper = (ClientHelper) input.readObject();
                 serverResponse(clientHelper.getResponseNumber());
@@ -45,20 +43,9 @@ public class ClientController {
     }
 
     public void serverResponse(int option) throws IOException, ClassNotFoundException {
-
-        if(option ==1) // refresh entire page
-
-
-        if(option ==2) { // delete confirmed
+        if (option == 1) {// refresh entire page
+            theView.setClientData(clientHelper.getClientList());
         }
-        if(option == 3) { // edit confirmed
-
-        }
-
-        if(option ==5) { // Update & save
-
-        }
-
     }
 
     public void attachListeners() {
@@ -81,20 +68,25 @@ public class ClientController {
             if(theView.getClientIdRadio().isSelected()) {
                 try {
                     int id = Integer.parseInt(theView.getInputSearchText().getText());
-                    //list = mainApplication.getCliendRow("ID", String.valueOf(id), list);
+                    clientHelper.setRequestNumber(31);
+                    clientHelper.setSearchParameter(String.valueOf(id));
+                    sendObject(clientHelper);
                 } catch (NumberFormatException err) {
                     theView.showMessage("Please enter valid ID");
                     isCheck = true;
                 }
             } else if(theView.getlNameRadio().isSelected()) {
-                //list = mainApplication.getCliendRow("LastName", theView.getInputSearchText().getText(), list);
+                clientHelper.setRequestNumber(32);
+                clientHelper.setSearchParameter(theView.getInputSearchText().getText());
+                sendObject(clientHelper);
             } else if(theView.getClientTypeRadio().isSelected()) {
-                //list = mainApplication.getCliendRow("ClientType", theView.getInputSearchText().getText(), list);
+                clientHelper.setRequestNumber(33);
+                clientHelper.setSearchParameter(theView.getInputSearchText().getText());
+                sendObject(clientHelper);
             }
-            if(list.size() == 0 && !isCheck) {
-                theView.showMessage("Please enter valid search criteria");
-            }
-            theView.setClientData(list);
+//            if(list.size() == 0 && !isCheck) {
+//                theView.showMessage("Please enter valid search criteria");
+//            }
         });
     }
 
@@ -200,6 +192,14 @@ public class ClientController {
                 }
             }
         });
+    }
+    public void sendObject(ClientHelper aClientHelper) {
+        aClientHelper = new ClientHelper(aClientHelper.getResponseNumber(), aClientHelper.getRequestNumber(), aClientHelper.getSearchParameter(), aClientHelper.getClientList());
+        try {
+            this.output.writeObject(aClientHelper);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
