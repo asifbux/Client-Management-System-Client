@@ -46,6 +46,10 @@ public class ClientController {
         if (option == 1) {// refresh entire page
             theView.setClientData(clientHelper.getClientList());
         }
+        if(option == 3) {
+            theView.setClientData(clientHelper.getClientList());
+            theView.showMessage(clientHelper.getSearchParameter());
+        }
     }
 
     public void attachListeners() {
@@ -112,28 +116,26 @@ public class ClientController {
      * Save client listener.
      */
     public void saveClientListener() {
-//        this.theView.getSaveButton().addActionListener((ActionEvent e) -> {
-//            Client model = new Client();
-//            model = theView.getClientData(model);
-//            if(model.getFirstName().trim().isEmpty() || model.getLastName().trim().isEmpty() || model.getPostalCode().trim().isEmpty()
-//                    ||model.getClientType().trim().isEmpty() || model.getAddress().trim().isEmpty() || model.getPhoneNumber().trim().equals("-   -")) {
-//                theView.showMessage("Please enter all fields");
-//            } else if (model.getFirstName().length() > 20) {
-//                theView.showMessage("First name field should be less than 20 characters");
-//            } else if (model.getLastName().length() > 20) {
-//                theView.showMessage("Last name field should be less than 20 characters");
-//            } else if (model.getAddress().length() > 50) {
-//                theView.showMessage("Address field should be less than 50 characters");
-//            } else {
-//                if(model.getId() != 0) {
-//                    mainApplication.updateClient(model);
-//                } else {
-//                    mainApplication.addClient(model);
-//                }
-//                theView.clearRightSideData();
-//            }
-//            //mainApplication.addOrUpdateClient();
-//        });
+        this.theView.getSaveButton().addActionListener((ActionEvent e) -> {
+            Client client = new Client();
+            client = theView.getClientData(client);
+            if(client.getFirstName().trim().isEmpty() || client.getLastName().trim().isEmpty() || client.getPostalCode().trim().isEmpty()
+                    ||client.getClientType().trim().isEmpty() || client.getAddress().trim().isEmpty() || client.getPhoneNumber().trim().equals("-   -")) {
+                theView.showMessage("Please enter all fields");
+            } else if (client.getFirstName().length() > 20) {
+                theView.showMessage("First name field should be less than 20 characters");
+            } else if (client.getLastName().length() > 20) {
+                theView.showMessage("Last name field should be less than 20 characters");
+            } else if (client.getAddress().length() > 50) {
+                theView.showMessage("Address field should be less than 50 characters");
+            } else {
+                clientHelper.getClientList().clear();
+                clientHelper.getClientList().add(client);
+                clientHelper.setRequestNumber(1);
+                theView.clearRightSideData();
+                sendObject(clientHelper);
+            }
+        });
     }
 
     /**
