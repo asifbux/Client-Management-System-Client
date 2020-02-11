@@ -151,19 +151,22 @@ public class ClientController {
      * Delete client listener.
      */
     public void deleteClientListener() {
-//        this.theView.getDeleteButton().addActionListener((ActionEvent e) -> {
-//            int id = theView.getClientToBeDeleted();
-//            ArrayList<Client> list = mainApplication.deleteClient(id);
-//            if(list != null && list.size() > 0) {
-//                for(int i = 0; i < list.size(); i++) {
-//                    if(list.get(i).getId() == id) {
-//                        list.remove(i);
-//                        theView.setJList(list);
-//                    }
-//                }
-//                theView.clearRightSideData();
-//            }
-//        });
+        this.theView.getDeleteButton().addActionListener((ActionEvent e) -> {
+            int id = theView.getClientToBeDeleted();
+            clientHelper.setRequestNumber(2);
+            clientHelper.setSearchParameter(String.valueOf(id));
+            sendObject(clientHelper);
+            //ArrayList<Client> list = mainApplication.deleteClient(id);
+            if(clientHelper.getClientList() != null && clientHelper.getClientList().size() > 0) {
+                for(int i = 0; i < clientHelper.getClientList().size(); i++) {
+                    if(clientHelper.getClientList().get(i).getId() == id) {
+                        clientHelper.getClientList().remove(i);
+                        theView.setJList(clientHelper.getClientList());
+                    }
+                }
+                theView.clearRightSideData();
+            }
+        });
     }
 
     /**
