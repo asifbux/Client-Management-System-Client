@@ -44,6 +44,7 @@ public class ClientController {
 
     public void serverResponse(int option) throws IOException, ClassNotFoundException {
         if (option == 1) {// refresh entire page
+
             theView.setClientData(clientHelper.getClientList());
         }
         if(option == 3) {
@@ -68,7 +69,7 @@ public class ClientController {
     public void attachSearchListener() {
         this.theView.getSearchButton().addActionListener((ActionEvent e) -> {
             ArrayList<Client> list = new ArrayList<Client>();
-            boolean isCheck = false;
+            clientHelper.getClientList().clear();
             if(theView.getClientIdRadio().isSelected()) {
                 try {
                     int id = Integer.parseInt(theView.getInputSearchText().getText());
@@ -77,7 +78,6 @@ public class ClientController {
                     sendObject(clientHelper);
                 } catch (NumberFormatException err) {
                     theView.showMessage("Please enter valid ID");
-                    isCheck = true;
                 }
             } else if(theView.getlNameRadio().isSelected()) {
                 clientHelper.setRequestNumber(32);
@@ -88,9 +88,6 @@ public class ClientController {
                 clientHelper.setSearchParameter(theView.getInputSearchText().getText());
                 sendObject(clientHelper);
             }
-//            if(list.size() == 0 && !isCheck) {
-//                theView.showMessage("Please enter valid search criteria");
-//            }
         });
     }
 

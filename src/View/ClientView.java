@@ -58,6 +58,14 @@ public class ClientView extends JFrame {
     /** The client type combo box. */
     private JComboBox clientTypeComboBox;
 
+    public JList getSearchResultList() {
+        return searchResultList;
+    }
+
+    public void setSearchResultList(JList searchResultList) {
+        this.searchResultList = searchResultList;
+    }
+
     /** The search result list. */
     private JList searchResultList;
 
@@ -289,6 +297,9 @@ public class ClientView extends JFrame {
      * @param list the new client data
      */
     public void setClientData(ArrayList<Client> list) {
+        //DefaultListModel listModel = (DefaultListModel) searchResultList.getModel();
+        //listModel.removeAllElements();
+        searchResultList.removeAll();
         searchResultList.setListData(list.toArray());
         searchResultList.addListSelectionListener(new ListSelectionListener() {
             @Override
