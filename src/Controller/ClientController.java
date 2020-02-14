@@ -3,7 +3,6 @@ package Controller;
 import Model.Client;
 import Model.ClientHelper;
 import View.ClientView;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,6 +12,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * The type Client controller.
+ */
 public class ClientController {
 
     private Socket aSocket;
@@ -22,6 +24,12 @@ public class ClientController {
     private ClientHelper clientHelper;
 
 
+    /**
+     * Instantiates a new Client controller.
+     *
+     * @param serverName the server name
+     * @param portNumber the port number
+     */
     public ClientController(String serverName, int portNumber) {
         try {
             aSocket = new Socket(serverName, portNumber);
@@ -42,6 +50,13 @@ public class ClientController {
 
     }
 
+    /**
+     * Server response.
+     *
+     * @param option the option
+     * @throws IOException            the io exception
+     * @throws ClassNotFoundException the class not found exception
+     */
     public void serverResponse(int option) throws IOException, ClassNotFoundException {
         if (option == 1) {// refresh entire page
 
@@ -53,6 +68,9 @@ public class ClientController {
         }
     }
 
+    /**
+     * Attach listeners.
+     */
     public void attachListeners() {
         attachSearchListener();
         attachClearSearchListener();
@@ -195,6 +213,12 @@ public class ClientController {
             }
         });
     }
+
+    /**
+     * Send object.
+     *
+     * @param aClientHelper the a client helper
+     */
     public void sendObject(ClientHelper aClientHelper) {
         aClientHelper = new ClientHelper(aClientHelper.getResponseNumber(), aClientHelper.getRequestNumber(), aClientHelper.getSearchParameter(), aClientHelper.getClientList());
         try {
@@ -205,8 +229,13 @@ public class ClientController {
     }
 
 
-
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
-        ClientController aClient = new ClientController("localhost", 9806);
+        ClientController aClient = new ClientController("10.13.182.7", 9806);
     }
 }

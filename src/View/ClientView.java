@@ -1,7 +1,6 @@
 package View;
 
 import Model.Client;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -10,6 +9,9 @@ import java.awt.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * The type Client view.
+ */
 public class ClientView extends JFrame {
 
     /** The search results. */
@@ -58,10 +60,20 @@ public class ClientView extends JFrame {
     /** The client type combo box. */
     private JComboBox clientTypeComboBox;
 
+    /**
+     * Gets search result list.
+     *
+     * @return the search result list
+     */
     public JList getSearchResultList() {
         return searchResultList;
     }
 
+    /**
+     * Sets search result list.
+     *
+     * @param searchResultList the search result list
+     */
     public void setSearchResultList(JList searchResultList) {
         this.searchResultList = searchResultList;
     }
@@ -89,7 +101,7 @@ public class ClientView extends JFrame {
     /**
      * Creates the child panels.
      *
-     * @param mainPanel the main panel
+     * @param mainPanel   the main panel
      * @param constraints the constraints
      */
     public void createChildPanels(JPanel mainPanel, GridBagConstraints constraints) {
@@ -118,7 +130,7 @@ public class ClientView extends JFrame {
     /**
      * Populate left side.
      *
-     * @param mainPanel the main panel
+     * @param mainPanel   the main panel
      * @param constraints the constraints
      */
     public void populateLeftSide(JPanel mainPanel, GridBagConstraints constraints) {
@@ -172,7 +184,7 @@ public class ClientView extends JFrame {
     /**
      * Populate below left side.
      *
-     * @param mainPanel the main panel
+     * @param mainPanel   the main panel
      * @param constraints the constraints
      */
     public void populateBelowLeftSide(JPanel mainPanel, GridBagConstraints constraints) {
@@ -198,7 +210,7 @@ public class ClientView extends JFrame {
     /**
      * Populate right side.
      *
-     * @param mainPanel the main panel
+     * @param mainPanel   the main panel
      * @param constraints the constraints
      */
     public void populateRightSide(JPanel mainPanel, GridBagConstraints constraints) {
@@ -272,14 +284,14 @@ public class ClientView extends JFrame {
     /**
      * Sets the label and text.
      *
-     * @param labelName the label name
-     * @param textField the text field
-     * @param x1 the x 1
-     * @param y1 the y 1
-     * @param x2 the x 2
-     * @param y2 the y 2
+     * @param labelName        the label name
+     * @param textField        the text field
+     * @param x1               the x 1
+     * @param y1               the y 1
+     * @param x2               the x 2
+     * @param y2               the y 2
      * @param childConstraints the child constraints
-     * @param rightPanel the right panel
+     * @param rightPanel       the right panel
      */
     public void setLabelAndText(String labelName, JTextField textField, int x1, int y1, int x2, int y2, GridBagConstraints childConstraints, JPanel rightPanel) {
         JLabel idLabel = new JLabel(labelName);
