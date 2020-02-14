@@ -236,6 +236,6 @@ public class ClientController {
      * @throws IOException the io exception
      */
     public static void main(String[] args) throws IOException {
-        ClientController aClient = new ClientController("10.13.182.7", 9806);
+        ClientController aClient = new ClientController("localhost", 9806);
     }
 }
